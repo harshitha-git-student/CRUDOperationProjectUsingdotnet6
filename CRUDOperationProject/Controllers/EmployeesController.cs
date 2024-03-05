@@ -20,6 +20,9 @@ namespace CRUDOperationProject.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+       
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
             if (_dbContext.Employees == null)
@@ -30,6 +33,10 @@ namespace CRUDOperationProject.Controllers
         }
 
         [HttpGet ("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
             if(_dbContext.Employees == null) 
@@ -46,6 +53,9 @@ namespace CRUDOperationProject.Controllers
 
         [HttpPost]
         [Route("Create")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
            
@@ -57,6 +67,10 @@ namespace CRUDOperationProject.Controllers
 
         [HttpPut]
         [Route("{id:int}", Name = "UpdateById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> PutEmployee(int id, Employee employee)
         {
             if(id != employee.Id)
@@ -88,6 +102,10 @@ namespace CRUDOperationProject.Controllers
         }
 
         [HttpDelete("{id}", Name = "Delete")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteEmployee(int id)
         {
             if(_dbContext.Employees == null)
